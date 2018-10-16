@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<deployment>
+  <projectSettings>
+    <!-- EnvironmentType: Test, Dev, QA, UATPri, UATSec, PRDPri, PRDSec.-->
+    <!-- Can deploy to multiple environments per run using pipe delimited string like: value="UATPri|UATSec" -->
+    <setting name="EnvironmentType" value="Test" />
+    <setting name="SSISCatalog" value="SSISDB" />
+    <setting name="MultiEnvPerCatalog" value="false" />
+    <setting name="SSISFolderName" value="DemoSSISPackage" />
+    <setting name="SSISFolderDescription" value="Demo SSIS Package" />
+    <setting name="SSISProjectName" value="DemoSSISPackage" />
+    <!-- If use="true" the ISPAC file will be deployed. -->
+    <setting name="SSISProjectFilename" value="DemoSSISPackage.ispac" use="true" />
+    <setting name="MapProjParamsToEnvVar" value="true" />
+    <!-- If use="true" the SQL Agent Job Script(s) are executed. -->
+    <setting name="SQLAgentJobScript" value="CreateJobDemoSSISPackage.sql" use="true" />
+  </projectSettings>
+  <proxyCredentialSetup>
+    <proxy name="CredentialName" value="Test_CredProxy" />
+    <!-- If use="true" the proxy name can be used in the SQL Agent Job Script(s). -->
+    <proxy name="SSISProxyName" value="Test_CredProxy" use="false" />
+    <proxy name="CreateCredential" value="false" />
+    <proxy name="CreateProxy" value="false" />
+    <proxy name="SameIdentitySecretForAllEnv" value="true" />
+  </proxyCredentialSetup>
+  <environmentServerNames>
+    <environment name="Test" server="CSAVKCCSQLQ5" />
+    <environment name="Dev" server="CSAVKCCSQLQ5" />
+    <environment name="QA" server="CSAVKCCSQLQ5" />
+    <environment name="UATPri" server="CSAVKCCSQLQ5" />
+    <environment name="UATSec" server="CSAVKCCSQLQ5" />
+    <environment name="PRDPri" server="CSAVKCCSQLQ5" />
+    <environment name="PRDSec" server="CSAVKCCSQLQ5" />
+  </environmentServerNames>
+  <environmentVariablesTest>
+	<!-- Variable Types: Boolean, Byte, Char, DateTime, DBNull, Decimal, Double, Empty, Int16, Int32, Int64, Object, SByte, Single, String, UInt16, UInt32, UInt64 -->
+    <variable name="DBName" type="String" value="SSISDB" sensitive="false" description="Connection String Database Name" />
+    <variable name="DBPWD" type="String" value="" sensitive="true" description="Connection String Password" />
+    <variable name="DBUID" type="String" value="" sensitive="true" description="Connection String User ID, Leave Blank For Integrated Security" />
+    <variable name="ServerName" type="String" value="CSAVKCCSQLQ5" sensitive="false" description="Connection String Database Server Name" />
+    <variable name="CopyReport" type="Boolean" value="true" sensitive="false" description="Switch That Determines If An Output File Is Created." />
+    <variable name="Days" type="Int16" value="-1" sensitive="false" description="Number Of Days To Report On. Needs To Be A Negative Number." />
+    <variable name="OutputFolder" type="String" value="\\CSAVKCCGWIN747\EmailAttachments\" sensitive="false" description="Folder Where The Output File Is Copied. Needs To Be A Local Folder, Or Share Accessable By &quot;Everyone&quot;." />
+    <variable name="PackageName" type="String" value="CARSDocHarvest.dtsx" sensitive="false" description="Name Of The SSIS Package To Report On." />
+  </environmentVariablesTest>
+  <environmentVariablesDev>
+	<!-- Variable Types: Boolean, Byte, Char, DateTime, DBNull, Decimal, Double, Empty, Int16, Int32, Int64, Object, SByte, Single, String, UInt16, UInt32, UInt64 -->
+  </environmentVariablesDev>
+  <environmentVariablesQA>
+	<!-- Variable Types: Boolean, Byte, Char, DateTime, DBNull, Decimal, Double, Empty, Int16, Int32, Int64, Object, SByte, Single, String, UInt16, UInt32, UInt64 -->
+    <variable name="DBName" type="String" value="SSISDB" sensitive="false" description="Connection String Database Name" />
+    <variable name="DBPWD" type="String" value="" sensitive="true" description="Connection String Password" />
+    <variable name="DBUID" type="String" value="" sensitive="true" description="Connection String User ID, Leave Blank For Integrated Security" />
+    <variable name="ServerName" type="String" value="CSAVKCCSQLQ5" sensitive="false" description="Connection String Database Server Name" />
+    <variable name="CopyReport" type="Boolean" value="true" sensitive="false" description="Switch That Determines If An Output File Is Created." />
+    <variable name="Days" type="Int16" value="-1" sensitive="false" description="Number Of Days To Report On. Needs To Be A Negative Number." />
+    <variable name="OutputFolder" type="String" value="\\CSAVKCCGWIN747\EmailAttachments\" sensitive="false" description="Folder Where The Output File Is Copied. Needs To Be A Local Folder, Or Share Accessable By &quot;Everyone&quot;." />
+    <variable name="PackageName" type="String" value="DemoSSISPackage.dtsx" sensitive="false" description="Name Of The SSIS Package To Report On." />
+  </environmentVariablesQA>
+  <environmentVariablesUATPri>
+	<!-- Variable Types: Boolean, Byte, Char, DateTime, DBNull, Decimal, Double, Empty, Int16, Int32, Int64, Object, SByte, Single, String, UInt16, UInt32, UInt64 -->
+  </environmentVariablesUATPri>
+  <environmentVariablesUATSec>
+	<!-- Variable Types: Boolean, Byte, Char, DateTime, DBNull, Decimal, Double, Empty, Int16, Int32, Int64, Object, SByte, Single, String, UInt16, UInt32, UInt64 -->
+  </environmentVariablesUATSec>
+  <environmentVariablesPRDPri>
+	<!-- Variable Types: Boolean, Byte, Char, DateTime, DBNull, Decimal, Double, Empty, Int16, Int32, Int64, Object, SByte, Single, String, UInt16, UInt32, UInt64 -->
+    <variable name="DBName" type="String" value="SSISDB" sensitive="false" description="Connection String Database Name" />
+    <variable name="DBPWD" type="String" value="" sensitive="true" description="Connection String Password" />
+    <variable name="DBUID" type="String" value="" sensitive="true" description="Connection String User ID, Leave Blank For Integrated Security" />
+    <variable name="ServerName" type="String" value="CSAVKCCSQLQ5" sensitive="false" description="Connection String Database Server Name" />
+    <variable name="CopyReport" type="Boolean" value="false" sensitive="false" description="Switch That Determines If An Output File Is Created." />
+    <variable name="Days" type="Int16" value="-1" sensitive="false" description="Number Of Days To Report On. Needs To Be A Negative Number." />
+    <variable name="OutputFolder" type="String" value="\\CSAVKCCGWIN747\EmailAttachments\" sensitive="false" description="Folder Where The Output File Is Copied. Needs To Be A Local Folder, Or Share Accessable By &quot;Everyone&quot;." />
+    <variable name="PackageName" type="String" value="DemoSSISPackage.dtsx" sensitive="false" description="Name Of The SSIS Package To Report On." />
+  </environmentVariablesPRDPri>
+  <environmentVariablesPRDSec>
+	<!-- Variable Types: Boolean, Byte, Char, DateTime, DBNull, Decimal, Double, Empty, Int16, Int32, Int64, Object, SByte, Single, String, UInt16, UInt32, UInt64 -->
+  </environmentVariablesPRDSec>
+</deployment>
