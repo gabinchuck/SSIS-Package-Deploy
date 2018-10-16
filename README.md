@@ -3,7 +3,7 @@ Project Used To Deploy SSIS Packages
 
 Facilitates SSIS Package installation, configuring Package settings, and SQL Agent Job deployment
 using a C# Windows Form utility program SSISPkgDeploy.exe. Most of the settings for the deployment
-are located in an XM file.
+are located in an XML file.
 
 Prerequisites for running this program are having the .Net Framework 4.5.2 installed, and the
 utility uses integrated security to connect to the target deployment server(s). So, the user
