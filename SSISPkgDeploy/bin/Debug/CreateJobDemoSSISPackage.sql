@@ -10,7 +10,7 @@ DECLARE @bMultiEnvPerCatalog BIT = 'False'; -- Comment out if run by the deploym
 DECLARE @sSSISFolderName NVARCHAR(128) = N'DemoSSISPackage'; -- Comment out if run by the deployment tool.
 DECLARE @sSSISProjectName NVARCHAR(128) = N'DemoSSISPackage'; -- Comment out if run by the deployment tool.
 DECLARE @sSSISProxyName NVARCHAR(128) = N''; -- Comment out if run by the deployment tool. (e.g. PayHub_Proxy, blank for no proxy)
-DECLARE @sSSISCatServerName NVARCHAR(128) = N'CSAVKCCSQLQ5'; -- Comment out if run by the deployment tool.
+DECLARE @sSSISCatServerName NVARCHAR(128) = N'BACKUPSERVER'; -- Comment out if run by the deployment tool.
 */
 /*
 SELECT * FROM msdb.dbo.sysjobs WHERE [name] LIKE 'SSIS.%' ORDER BY [name]
@@ -113,7 +113,7 @@ BEGIN TRY
 		SET @sDescription = N'SQL Job To Run The Demo SSIS Package ' + @sDTSXName;
 		EXEC @ReturnCode = msdb.dbo.sp_add_job
 			@job_name = @sPkgName,
-			@enabled = 0, -- 1 = True, 0 = False.
+			@enabled = 1, -- 1 = True, 0 = False.
 			@notify_level_eventlog = 0,
 			@notify_level_email = 0,
 			@notify_level_netsend = 0,
