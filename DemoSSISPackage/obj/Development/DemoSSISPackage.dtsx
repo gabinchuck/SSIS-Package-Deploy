@@ -7,13 +7,13 @@
   DTS:CreatorName="AMERICAS\hardyc1"
   DTS:DTSID="{DEF974EF-2F71-406A-B203-60F08675851E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.3002.107"
+  DTS:LastModifiedProductVersion="15.0.0900.30"
   DTS:LocaleID="1033"
   DTS:ObjectName="DemoSSISPackage"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{54B3D498-FB78-4B8F-A95E-ADC5AEF473F0}">
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{E905190E-80BF-4493-A83D-ABB6F931CFD0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -26,7 +26,7 @@
         DTS:Name="ConnectionString">"Data Source=" + @[$Project::ServerName] + ";Initial Catalog=" + @[$Project::DBName] + ";" + (LEN(@[User::DBUID]) &gt; 0 ? "User ID=" + @[User::DBUID] + ";Password=" + @[User::DBPWD] + ";" : "Integrated Security=SSPI;")</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=CSAVKCCSQLQ5;Initial Catalog=SSISDB ;Integrated Security=SSPI;" />
+          DTS:ConnectionString="Data Source=BACKUPSERVER;Initial Catalog=SSISDB ;Integrated Security=SSPI;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -45,7 +45,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="\\CSAVKCCGWIN747\EmailAttachments\SSIS_Pkg_Log_20181015.csv">
+          DTS:ConnectionString="D:\SSIS_Pkg_Log_20181020.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -168,7 +168,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="FileName">
       <DTS:VariableValue
-        DTS:DataType="8">\\CSAVKCCGWIN747\EmailAttachments\SSIS_Pkg_Log_20181015.csv</DTS:VariableValue>
+        DTS:DataType="8">D:\SSIS_Pkg_Log_20181020.csv</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -236,6 +236,10 @@ ORDER BY EM.message_time DESC;"</DTS:PropertyExpression>
                   description="Specifies the text to write to the destination file before any data is written."
                   expressionType="Notify"
                   name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
               </properties>
               <connections>
                 <connection
@@ -523,7 +527,7 @@ ORDER BY EM.message_time DESC;"</DTS:PropertyExpression>
 	,[Message Type] = EM.message_type
 	,[Message Source Type] = EM.message_source_type
 FROM SSISDB.CATALOG.event_messages EM
-WHERE EM.package_name = 'CARSDocHarvest.dtsx'
+WHERE EM.package_name = 'DemoSSISPackage.dtsx'
 	AND EM.message_time &gt; DATEADD(dd, -1, current_timestamp)
 	AND EM.event_name NOT LIKE '%Validate%'
 ORDER BY EM.message_time DESC;</property>
@@ -969,36 +973,6 @@ ORDER BY EM.message_time DESC;</property>
           ReadOnlyVariables="$Project::DBPWD,$Project::DBUID"
           ReadWriteVariables="User::DBPWD,User::DBUID">
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_f38adad7f77c4240b0d8dadfbf2a97a1")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Computershare")]
-[assembly: AssemblyProduct("ST_f38adad7f77c4240b0d8dadfbf2a97a1")]
-[assembly: AssemblyCopyright("Copyright @ Computershare 2018")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
-          <ProjectItem
             Name="Properties\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <root>
@@ -1118,14 +1092,34 @@ using System.Runtime.CompilerServices;
   </resheader>
 </root>]]></ProjectItem>
           <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+            Name="Properties\Settings.Designer.cs"
+            Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_f38adad7f77c4240b0d8dadfbf2a97a1.Properties.Settings.get_Default():ST_f38adad7f77c4240b0d8dadfbf2a97a1.Properties.Sett" +
+    "ings")]
+
+namespace ST_f38adad7f77c4240b0d8dadfbf2a97a1.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
           <ProjectItem
             Name="ScriptMain.cs"
             Encoding="UTF8"><![CDATA[#region Namespaces
@@ -1203,55 +1197,6 @@ namespace ST_f38adad7f77c4240b0d8dadfbf2a97a1
         #endregion
     } // public partial class ScriptMain
 } // namespace]]></ProjectItem>
-          <ProjectItem
-            Name="Project"
-            Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
-<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
-	<msb:PropertyGroup>
-		<msb:Language>msBuild</msb:Language>
-		<msb:CodeName>ST_f38adad7f77c4240b0d8dadfbf2a97a1</msb:CodeName>
-		<msb:DisplayName>ST_f38adad7f77c4240b0d8dadfbf2a97a1</msb:DisplayName>
-		<msb:ProjectId>{5086F29E-5555-4D50-A7C2-E72E85F20963}</msb:ProjectId>
-	</msb:PropertyGroup>
-	<msb:ItemGroup>
-		<msb:Project Include="ST_f38adad7f77c4240b0d8dadfbf2a97a1.csproj"/>
-		<msb:File Include="Properties\Settings.settings"/>
-		<msb:File Include="Properties\AssemblyInfo.cs"/>
-		<msb:File Include="Properties\Resources.resx"/>
-		<msb:File Include="Properties\Resources.Designer.cs"/>
-		<msb:File Include="Properties\Settings.Designer.cs"/>
-		<msb:File Include="ScriptMain.cs"/>
-	</msb:ItemGroup>
-</c:Project>]]></ProjectItem>
-          <ProjectItem
-            Name="Properties\Settings.Designer.cs"
-            Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_f38adad7f77c4240b0d8dadfbf2a97a1.Properties.Settings.get_Default():ST_f38adad7f77c4240b0d8dadfbf2a97a1.Properties.Sett" +
-    "ings")]
-
-namespace ST_f38adad7f77c4240b0d8dadfbf2a97a1.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
           <ProjectItem
             Name="ST_f38adad7f77c4240b0d8dadfbf2a97a1.csproj"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1337,6 +1282,65 @@ namespace ST_f38adad7f77c4240b0d8dadfbf2a97a1.Properties {
     </VisualStudio>
   </ProjectExtensions>
 </Project>]]></ProjectItem>
+          <ProjectItem
+            Name="Project"
+            Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>ST_f38adad7f77c4240b0d8dadfbf2a97a1</msb:CodeName>
+		<msb:DisplayName>ST_f38adad7f77c4240b0d8dadfbf2a97a1</msb:DisplayName>
+		<msb:ProjectId>{5086F29E-5555-4D50-A7C2-E72E85F20963}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ST_f38adad7f77c4240b0d8dadfbf2a97a1.csproj"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="ScriptMain.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+          <ProjectItem
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_f38adad7f77c4240b0d8dadfbf2a97a1")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Computershare")]
+[assembly: AssemblyProduct("ST_f38adad7f77c4240b0d8dadfbf2a97a1")]
+[assembly: AssemblyCopyright("Copyright @ Computershare 2018")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+          <ProjectItem
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -1569,17 +1573,17 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="272,42"
-          Id="Package\Sensitive to Normal Variable, Script Task"
-          TopLeft="39,21" />
+          Size="252,42"
+          Id="Package\Delete Output File, File System Task"
+          TopLeft="48,93" />
         <NodeLayout
           Size="329,42"
           Id="Package\Get SSISDB Data Create Output File, Data Flow Task"
           TopLeft="8,169" />
         <NodeLayout
-          Size="252,42"
-          Id="Package\Delete Output File, File System Task"
-          TopLeft="48,93" />
+          Size="272,42"
+          Id="Package\Sensitive to Normal Variable, Script Task"
+          TopLeft="39,21" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="174.5,63">
@@ -1635,6 +1639,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="280,42"
+          Id="Package\Get SSISDB Data Create Output File, Data Flow Task\DT_NTEXT to DT_WSTR, Data Conversion"
+          TopLeft="71,87" />
+        <NodeLayout
           Size="396,42"
           Id="Package\Get SSISDB Data Create Output File, Data Flow Task\Get SSISDB Data Using Dynamic SQL Experssion, ADO NET Source"
           TopLeft="16,12" />
@@ -1643,27 +1651,23 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           Id="Package\Get SSISDB Data Create Output File, Data Flow Task\CSV Output File, Flat File Destination"
           TopLeft="83,248" />
         <NodeLayout
-          Size="280,42"
-          Id="Package\Get SSISDB Data Create Output File, Data Flow Task\DT_NTEXT to DT_WSTR, Data Conversion"
-          TopLeft="71,87" />
-        <NodeLayout
           Size="279,42"
           Id="Package\Get SSISDB Data Create Output File, Data Flow Task\REPLACE Bad Characters, Derived Column"
           TopLeft="70,170" />
         <EdgeLayout
-          Id="Package\Get SSISDB Data Create Output File, Data Flow Task.Paths[ADO NET Source Output]"
-          TopLeft="212.5,54">
+          Id="Package\Get SSISDB Data Create Output File, Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="209.75,212">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,33"
+              EndConnector="0,36"
               Start="0,0"
-              End="0,25.5">
+              End="0,28.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.5" />
+                    End="0,28.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1695,19 +1699,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Get SSISDB Data Create Output File, Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="209.75,212">
+          Id="Package\Get SSISDB Data Create Output File, Data Flow Task.Paths[ADO NET Source Output]"
+          TopLeft="212.5,54">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,36"
+              EndConnector="0,33"
               Start="0,0"
-              End="0,28.5">
+              End="0,25.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.5" />
+                    End="0,25.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

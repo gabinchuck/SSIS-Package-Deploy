@@ -2,13 +2,13 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>DemoSSISPackage</Name>
-    <LastWriteTime>2018-10-12T19:33:28.1155353Z</LastWriteTime>
+    <LastWriteTime>2018-10-21T05:33:31.8872338Z</LastWriteTime>
     <LastKnownProtectionLevel>DontSaveSensitive</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>DemoSSISPackage.dtsx</Name>
-      <LastWriteTime>2018-10-12T19:10:17.3795353Z</LastWriteTime>
+      <LastWriteTime>2018-10-21T05:03:26.3221767Z</LastWriteTime>
       <LastKnownProtectionLevel>DontSaveSensitive</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
