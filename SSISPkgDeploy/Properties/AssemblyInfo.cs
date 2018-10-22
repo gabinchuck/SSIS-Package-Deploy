@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SSISPkgDeploy")]
 [assembly: AssemblyDescription("Deploy SSIS ISPAC Files and Run SQL Job and Configuration Scripts.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Computershare")]
+[assembly: AssemblyCompany("No One Special")]
 [assembly: AssemblyProduct("SSISPkgDeploy")]
-[assembly: AssemblyCopyright("Copyright © Computershare 2018")]
+[assembly: AssemblyCopyright("Copyright © No One Special 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
