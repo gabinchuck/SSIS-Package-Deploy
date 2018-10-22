@@ -41,7 +41,7 @@ namespace SSISPkgDeploy
                 ttCredProxy.ShowAlways = true;
 
                 this.Text = "Enter Identity & Secret For Credential/Proxy Setup (" + envType + ")";
-                string ttIdentity = "Identity (User ID) Used To Create The Credential.\r\n" + @"Include Domain And User ID (e.g. 'AMERICAS\NASVC_KCC_PH_UAT').";
+                string ttIdentity = "Identity (User ID) Used To Create The Credential.\r\n" + @"Include Domain And User ID (e.g. 'MYDOMAIN\myuserid').";
                 string ttSecret = @"Secret (Password) Used To Create The Credential (e.g. 'vQXU4U%$Vb').";
                 ttCredProxy.SetToolTip(this.lblCredName, "Name Of The Credential Used For SSIS Package Execution.");
                 ttCredProxy.SetToolTip(this.lblSSISProxyName, "Name Of The Proxy Used For SSIS Package Execution.");
